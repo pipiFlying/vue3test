@@ -14,6 +14,7 @@ module.exports = {
     'space-before-function-paren': 'off',
     'comma-dangle': 'off',
     semi: 'off',
-    quotes: 'off'
+    quotes: 'off',
+    '@typescript-eslint/no-explicit-any': 'off'
   }
 };
