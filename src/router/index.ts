@@ -19,6 +19,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/Deal.vue')
   },
   {
+    path: '/flex',
+    name: 'flex',
+    component: () => import('@/views/Flex.vue')
+  },
+  {
     path: '/:catchAll(.*)',
     name: '404',
     component: () => import('@/common/404.vue')
