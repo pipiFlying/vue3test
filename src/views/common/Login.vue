@@ -6,8 +6,8 @@
         <el-tabs v-model="loginMethod" class="login-tabs" @tab-click="checkMethod">
           <el-tab-pane label="验证码登录" name="sms">
             <div class="smsbox">
-              <el-input class="common-input" v-model="formSms.account" placeholder="请输入手机号"></el-input>
-              <el-input class="common-input" v-model="formSms.code" placeholder="请输入短信验证码">
+              <el-input class="common_input" v-model="formSms.account" placeholder="请输入手机号"></el-input>
+              <el-input class="common_input" v-model="formSms.code" placeholder="请输入短信验证码">
                 <template #append>
                   <el-button @click="sendCode"> {{ time && time !== 60 ? `${time}s` : '点击发送' }}</el-button>
                 </template>
@@ -18,9 +18,9 @@
           </el-tab-pane>
           <el-tab-pane label="密码登录" name="password">
             <div class="passwordbox">
-              <el-input class="common-input" v-model="formPs.account" placeholder="请输入账号"></el-input>
+              <el-input class="common_input" v-model="formPs.account" placeholder="请输入账号"></el-input>
               <el-input
-                class="common-input"
+                class="common_input"
                 v-model="formPs.password"
                 placeholder="请输入密码"
                 show-password
@@ -30,11 +30,11 @@
                 <el-button type="primary" link>忘记密码?</el-button>
               </div>
               <el-button type="primary" class="submit" @click="submit">登录</el-button>
-              <div class="bottom-action">
+              <div class="action_bottom">
                 <el-checkbox v-model="deal" label="隐私协议" size="large"></el-checkbox>
                 <div class="register">
                   <span>没有账号?</span>
-                  <el-button class="register-button" type="primary" link>注册账号</el-button>
+                  <el-button class="register_button" type="primary" link>注册账号</el-button>
                 </div>
               </div>
             </div>
@@ -49,6 +49,7 @@
 import { ref, reactive, getCurrentInstance, watch, Ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import { getToken } from '@/api';
 
 interface FormPs {
   account: string;
@@ -117,7 +118,7 @@ const remember = () => {
   }
 };
 
-const submit = () => {
+const submit = async () => {
   if (loginMethod.value === 'sms') {
     const { account, code } = formSms;
     if (!account || account.length !== 11) {
@@ -150,7 +151,11 @@ const submit = () => {
       proxy.$message.error('请阅读并勾选隐私协议及隐私政策');
       return false;
     }
-    $store.dispatch('SET_TOKEN', 'e325d34a-31b8-4264-8f1c-a9bf23ce945d');
+    const {
+      data: { data, code }
+    } = await getToken(formPs);
+    if (code !== proxy.CODE_OK) return;
+    $store.dispatch('SET_TOKEN', data.token);
     $router.push('/');
   }
 };
@@ -191,47 +196,49 @@ onMounted(() => {
       box-shadow: 0 2px 10px grey;
       margin-top: 15px;
       .login-tabs {
-        ::v-deep .el-tabs__nav {
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-          width: 350px;
-          height: 50px;
-        }
-        ::v-deep .el-tabs__item {
-          font-weight: 600;
-          font-size: 16px;
-        }
-        ::v-deep .el-tabs__content {
-          padding: 0 40px 0 40px;
-          .smsbox {
+        ::v-deep .el-tabs {
+          &__nav {
             display: flex;
-            flex-direction: column;
-            .submit {
-              width: 100%;
-              margin-top: 20px;
-            }
+            justify-content: space-around;
+            align-items: center;
+            width: 350px;
+            height: 50px;
           }
-          .passwordbox {
-            display: flex;
-            flex-direction: column;
-            .action {
+          &__item {
+            font-weight: 600;
+            font-size: 16px;
+          }
+          &__content {
+            padding: 0 40px 0 40px;
+            .smsbox {
               display: flex;
-              justify-content: space-between;
-              align-content: center;
+              flex-direction: column;
+              .submit {
+                width: 100%;
+                margin-top: 20px;
+              }
             }
-            .bottom-action {
+            .passwordbox {
               display: flex;
-              justify-content: space-between;
-              align-items: center;
-              .register {
+              flex-direction: column;
+              .action {
                 display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #666;
-                font-size: 14px;
-                .register-button {
-                  padding: 0 2px;
+                justify-content: space-between;
+                align-content: center;
+                &_bottom {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  .register {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #666;
+                    font-size: 14px;
+                    &_button {
+                      padding: 0 2px;
+                    }
+                  }
                 }
               }
             }
@@ -240,9 +247,11 @@ onMounted(() => {
       }
     }
   }
-  .common-input {
-    margin-top: 20px;
-    height: 35px;
+  .common {
+    &_input {
+      margin-top: 20px;
+      height: 35px;
+    }
   }
 }
 </style>

@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, ref } from 'vue';
+import { Ref, ref, onMounted } from 'vue';
 
 const all: Ref<any[]> = ref([]);
 all.value = new Array(15).fill(0);

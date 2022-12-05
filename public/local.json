@@ -1,0 +1,11 @@
+{
+  "code": 200,
+  "data": [
+    { "typeName": "物联网平台", "name": "城市物联网平台", "code": "CreateDevice", "method": "POST" },
+    { "typeName": "物联网平台", "name": "城市物联网平台", "code": "BatchCreateDevice", "method": "POST" },
+    { "typeName": "物联网平台", "name": "城市物联网平台", "code": "UpdateDevice", "method": "POST" },
+    { "typeName": "物联网平台", "name": "城市物联网平台", "code": "CreateDevice", "method": "POST" },
+    { "typeName": "福州平台", "name": "城市福州平台", "code": "CreateDevice", "method": "POST" }
+  ],
+  "total": 5
+}

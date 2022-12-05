@@ -17,6 +17,11 @@ class StoreUser {
     storage[key] = value;
     localStorage.setItem(name, JSON.stringify(storage));
   }
+
+  clear() {
+    const { name } = this;
+    localStorage.setItem(name, JSON.stringify({}));
+  }
 }
 
 export const print = (title: string, value: string | number) => {

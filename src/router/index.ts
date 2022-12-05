@@ -24,6 +24,21 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/Flex.vue')
   },
   {
+    path: '/refuse',
+    name: 'refuse',
+    component: () => import('@/views/Refuse.vue')
+  },
+  {
+    path: '/sort',
+    name: 'sort',
+    component: () => import('@/views/Sort.vue')
+  },
+  {
+    path: '/source',
+    name: 'source',
+    component: () => import('@/views/Source.vue')
+  },
+  {
     path: '/:catchAll(.*)',
     name: '404',
     component: () => import('@/common/404.vue')

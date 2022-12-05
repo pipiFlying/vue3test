@@ -1,7 +1,8 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
+    'vue/setup-compiler-macros': true
   },
   extends: ['plugin:vue/vue3-essential', '@vue/standard', '@vue/typescript/recommended'],
   parserOptions: {
@@ -15,6 +16,8 @@ module.exports = {
     'comma-dangle': 'off',
     semi: 'off',
     quotes: 'off',
-    '@typescript-eslint/no-explicit-any': 'off'
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-empty-function': 'off'
   }
 };

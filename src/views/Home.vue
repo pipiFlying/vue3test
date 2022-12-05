@@ -1,6 +1,12 @@
 <template>
-  <div class="home">{{ data.msg }}</div>
-  <div class="home">{{ data.newMsg }}</div>
+  <div class="home">
+    <RouterLink to="/flex">Flex |</RouterLink>
+    <RouterLink to="/deal">Deal |</RouterLink>
+    <RouterLink to="/sort">Sort |</RouterLink>
+    <RouterLink to="/tstype">Tstype |</RouterLink>
+    <RouterLink to="/source">Source |</RouterLink>
+    <RouterLink to="/">Home</RouterLink>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -33,6 +39,5 @@ const effect = (value: any) => {
 };
 
 const proxy = new Proxy(data, handle);
-proxy.msg = 'dddddddd';
-console.log(proxy.msg);
+proxy.msg = '';
 </script>

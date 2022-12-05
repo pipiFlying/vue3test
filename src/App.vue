@@ -1,6 +1,13 @@
 <template>
-  <router-view />
+  <div>
+    <router-view />
+    <Loading />
+  </div>
 </template>
+
+<script setup lang="ts">
+import Loading from '@/common/Loading.vue';
+</script>
 
 <style lang="less">
 #app {
